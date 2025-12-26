@@ -12,4 +12,7 @@ def add():
 @marks_bp.route('/marks/<student_id>', methods=['GET'])
 def get(student_id):
     records = get_marks_by_student(request.db, student_id)
+    # Fix: Convert ObjectId to string
+    for record in records:
+        record['_id'] = str(record['_id'])
     return jsonify(records)

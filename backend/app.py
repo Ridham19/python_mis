@@ -1,13 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from pymongo import MongoClient
 from routes.auth import auth_bp
 from routes.user import user_bp
 from routes.attendance import attendance_bp
 from routes.marks import marks_bp
 from routes.notice import notice_bp
+import os
 
 def create_app():
-    app = Flask(__name__)
+    # Set static_folder to serve frontend files
+    app = Flask(__name__, static_folder='../frontend', static_url_path='')
 
     # MongoDB setup
     client = MongoClient("mongodb://localhost:27017/")
@@ -24,6 +26,16 @@ def create_app():
     app.register_blueprint(attendance_bp, url_prefix='/api')
     app.register_blueprint(marks_bp, url_prefix='/api')
     app.register_blueprint(notice_bp, url_prefix='/api')
+
+    # Serve Frontend - Index Route
+    @app.route('/')
+    def serve_index():
+        return send_from_directory(app.static_folder, 'index.html')
+
+    # Serve Frontend - Other Static Files (CSS, JS, HTML)
+    @app.route('/<path:path>')
+    def serve_static(path):
+        return send_from_directory(app.static_folder, path)
 
     return app
 

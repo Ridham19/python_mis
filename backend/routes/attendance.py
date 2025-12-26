@@ -12,4 +12,7 @@ def mark():
 @attendance_bp.route('/attendance/<student_id>', methods=['GET'])
 def get_attendance(student_id):
     records = get_attendance_by_student(request.db, student_id)
+    # Fix: Convert ObjectId to string
+    for record in records:
+        record['_id'] = str(record['_id'])
     return jsonify(records)
