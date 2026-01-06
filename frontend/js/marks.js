@@ -1,7 +1,7 @@
 async function loadMarks(userId) {
     const token = localStorage.getItem('token');
     try {
-        const res = await fetch(`/api/marks/${userId}`, {
+        const res = await fetch(`${CONFIG.API_BASE}/marks/${userId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const container = document.getElementById('marksData');
@@ -42,7 +42,7 @@ async function loadMarks(userId) {
         }
 
         // Load Past Semesters for Dropdown
-        const histRes = await fetch(`/api/results/history/${userId}`, {
+        const histRes = await fetch(`${CONFIG.API_BASE}/results/history/${userId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (histRes.ok) {
@@ -71,5 +71,5 @@ function downloadMarksheet() {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const userId = payload.user_id;
 
-    window.open(`/api/results/download/${userId}/${sem}`, '_blank');
+    window.open(`${CONFIG.API_BASE}/results/download/${userId}/${sem}`, '_blank');
 }

@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const role = payload.role;
 
   // 2. Fetch Full User Details
-  const res = await fetch(`/api/user/${userId}`, {
+  const res = await fetch(`${CONFIG.API_BASE}/user/${userId}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 

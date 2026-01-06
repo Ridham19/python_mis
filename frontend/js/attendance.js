@@ -32,8 +32,8 @@ async function loadTeacherSubjects() {
 
     try {
         const url = branchCode
-            ? `/api/attendance/teacher/subjects?branch_code=${branchCode}`
-            : '/api/attendance/teacher/subjects';
+            ? `${CONFIG.API_BASE}/attendance/teacher/subjects?branch_code=${branchCode}`
+            : `${CONFIG.API_BASE}/attendance/teacher/subjects`;
 
         const res = await fetch(url, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -68,7 +68,7 @@ async function loadClassList() {
     container.style.display = 'block';
 
     try {
-        const res = await fetch(`/api/attendance/class-list/${subjectCode}`, {
+        const res = await fetch(`${CONFIG.API_BASE}/attendance/class-list/${subjectCode}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -223,7 +223,7 @@ async function submitBulkAttendance() {
 
     const token = localStorage.getItem('token');
     try {
-        const res = await fetch('/api/attendance/bulk', {
+        const res = await fetch(`${CONFIG.API_BASE}/attendance/bulk`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

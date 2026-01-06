@@ -5,7 +5,7 @@ async function loadNotices(role) {
 
     try {
         const targetRole = role || 'student';
-        const res = await fetch(`/api/notices/${targetRole}`, {
+        const res = await fetch(`${CONFIG.API_BASE}/notices/${targetRole}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const notices = await res.json();

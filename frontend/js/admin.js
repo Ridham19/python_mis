@@ -37,7 +37,7 @@ async function fetch_with_auth(url) {
 
 async function loadDropdowns() {
     try {
-        const data = await fetch_with_auth('/api/admin/stats');
+        const data = await fetch_with_auth(`${CONFIG.API_BASE}/admin/stats`);
         const branches = data.branches;
         // const years = data.years; // Legacy
 
@@ -78,7 +78,7 @@ async function loadDropdowns() {
 
 async function loadFaculty() {
     const branch = document.getElementById('faculty-branch-select').value;
-    let url = '/api/admin/faculty-by-branch';
+    let url = `${CONFIG.API_BASE}/admin/faculty-by-branch`;
     if (branch) url += `?branch=${branch}`;
 
     const faculty = await fetch_with_auth(url);
@@ -89,7 +89,7 @@ async function loadStudents() {
     const branch = document.getElementById('student-branch-select').value;
     const semester = document.getElementById('student-semester-select').value;
 
-    let url = '/api/admin/students-by-year?';
+    let url = `${CONFIG.API_BASE}/admin/students-by-year?`;
     if (branch) url += `branch=${branch}&`;
     if (semester) url += `semester=${semester}`; // Renamed param to match intent
 
@@ -103,7 +103,7 @@ async function loadStudents() {
 /* --- Subjects Management --- */
 async function loadSubjects() {
     const branch = document.getElementById('subject-filter-branch').value;
-    let url = '/api/subjects';
+    let url = `${CONFIG.API_BASE}/subjects`;
     if (branch && branch !== 'All') url += `?branch=${branch}`;
 
     const subjects = await fetch_with_auth(url);
@@ -120,7 +120,7 @@ async function addSubject() {
     if (!name || !code) return alert("Fill all fields");
 
     const token = localStorage.getItem('token');
-    const res = await fetch('/api/subjects', {
+    const res = await fetch(`${CONFIG.API_BASE}/subjects`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ name, code, branch_code, semester })
@@ -175,8 +175,8 @@ async function viewStudent(studentId) {
     // Fetch user details + fees
     try {
         const [userRes, feeRes] = await Promise.all([
-            fetch(`/api/user/${studentId}`, { headers: { 'Authorization': `Bearer ${token}` } }),
-            fetch(`/api/fees/${studentId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+            fetch(`${CONFIG.API_BASE}/user/${studentId}`, { headers: { 'Authorization': `Bearer ${token}` } }),
+            fetch(`${CONFIG.API_BASE}/fees/${studentId}`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         const user = await userRes.json();
@@ -212,7 +212,7 @@ async function updateFeeStatus() {
     const status = document.getElementById('newFeeStatus').value;
     const token = localStorage.getItem('token');
 
-    const res = await fetch(`/api/fees/${currentEditingStudentId}`, {
+    const res = await fetch(`${CONFIG.API_BASE}/fees/${currentEditingStudentId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ async function postNotice() {
         }
 
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/notices', {
+        const res = await fetch(`${CONFIG.API_BASE}/notices`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

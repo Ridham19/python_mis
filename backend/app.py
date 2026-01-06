@@ -13,6 +13,10 @@ def create_app():
     
     client = MongoClient("mongodb://localhost:27017/")
     db = client["student_management_v2"]
+    
+    # Initialize Indexes
+    from models.indexes import init_indexes
+    init_indexes(db)
 
     @app.before_request
     def inject_db():

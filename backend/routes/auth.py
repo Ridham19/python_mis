@@ -2,10 +2,10 @@ from flask import Blueprint, request, jsonify
 from models.user import find_user_by_email, create_user
 import jwt
 import datetime
-import re # Regex for phone validation
+import re
+from config import JWT_SECRET, TOKEN_EXPIRY
 
 auth_bp = Blueprint('auth', __name__)
-SECRET_KEY = "your_secret_key"
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
@@ -62,8 +62,8 @@ def login():
             'user_id': str(user['_id']),
             'role': user['role'],
             'branch_code': user.get('branch_code', ''),
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=2)
-        }, SECRET_KEY, algorithm='HS256')
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=TOKEN_EXPIRY)
+        }, JWT_SECRET, algorithm='HS256')
         
         if isinstance(token, bytes): token = token.decode('utf-8')
         return jsonify({'token': token})

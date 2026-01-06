@@ -1,9 +1,12 @@
 from flask import Blueprint, request, jsonify
 from models.notice import create_notice, get_notices_for_role
+from middleware.auth_middleware import token_required, role_required
 
 notice_bp = Blueprint('notice', __name__)
 
 @notice_bp.route('/notices', methods=['POST'])
+@token_required
+@role_required(['admin', 'teacher'])
 def create():
     data = request.json
     visible_to = data.get('visible_to', [])

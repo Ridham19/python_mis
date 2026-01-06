@@ -3,6 +3,7 @@
 
 <head>
   <title>Register</title>
+  <script src="js/config.js"></script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -59,7 +60,7 @@
     async function loadBranches() {
       try {
         console.log("Fetching branches...");
-        const res = await fetch('/api/branches');
+        const res = await fetch(`${CONFIG.API_BASE}/branches`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const branches = await res.json();
@@ -113,7 +114,7 @@
         branch_code: branch_code
       };
 
-      const res = await fetch('/api/register', {
+      const res = await fetch(`${CONFIG.API_BASE}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

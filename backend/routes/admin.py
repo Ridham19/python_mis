@@ -1,8 +1,11 @@
 from flask import Blueprint, request, jsonify
+from middleware.auth_middleware import token_required, role_required
 
 admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/admin/faculty-by-branch', methods=['GET'])
+@token_required
+@role_required(['admin'])
 def get_faculty_by_branch():
     db = request.db
     # Get branch from query param if provided, else return all grouped?
@@ -20,6 +23,8 @@ def get_faculty_by_branch():
     return jsonify(faculty), 200
 
 @admin_bp.route('/admin/students-by-year', methods=['GET'])
+@token_required
+@role_required(['admin'])
 def get_students_by_year():
     db = request.db
     import math

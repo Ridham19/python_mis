@@ -372,119 +372,120 @@
             <div id="subjects-list"></div>
           </div>
 
-            <!-- Notices View -->
-            <div id="notices-section" class="admin-sub-view" style="display:none;">
-              <h3>Create Campus Notice</h3>
-              <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
-                <div style="margin-bottom: 15px;">
-                  <label>Title</label>
-                  <input type="text" id="noticeTitle" placeholder="e.g. Exam Schedule Released" style="margin-top:5px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                  <label>Message</label>
-                  <textarea id="noticeContent" rows="4" placeholder="Enter notice details..."
-                    style="width:100%; padding:10px; border-radius:8px; border:2px solid #dfe6e9; font-family:inherit;"></textarea>
-                </div>
-                <div style="margin-bottom: 20px;">
-                  <label>Visible To:</label>
-                  <div style="margin-top:10px; display:flex; gap:20px;">
-                    <label style="display:flex; align-items:center; gap:5px; cursor:pointer;">
-                      <input type="checkbox" value="student" class="notice-target" checked
-                        style="width:auto; margin:0;"> Students
-                    </label>
-                    <label style="display:flex; align-items:center; gap:5px; cursor:pointer;">
-                      <input type="checkbox" value="teacher" class="notice-target" checked
-                        style="width:auto; margin:0;"> Teachers
-                    </label>
-                  </div>
-                </div>
-                <button onclick="postNotice()" class="btn" style="background: var(--accent-color);">Post Notice</button>
+          <!-- Notices View -->
+          <div id="notices-section" class="admin-sub-view" style="display:none;">
+            <h3>Create Campus Notice</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+              <div style="margin-bottom: 15px;">
+                <label>Title</label>
+                <input type="text" id="noticeTitle" placeholder="e.g. Exam Schedule Released" style="margin-top:5px;">
               </div>
+              <div style="margin-bottom: 15px;">
+                <label>Message</label>
+                <textarea id="noticeContent" rows="4" placeholder="Enter notice details..."
+                  style="width:100%; padding:10px; border-radius:8px; border:2px solid #dfe6e9; font-family:inherit;"></textarea>
+              </div>
+              <div style="margin-bottom: 20px;">
+                <label>Visible To:</label>
+                <div style="margin-top:10px; display:flex; gap:20px;">
+                  <label style="display:flex; align-items:center; gap:5px; cursor:pointer;">
+                    <input type="checkbox" value="student" class="notice-target" checked style="width:auto; margin:0;">
+                    Students
+                  </label>
+                  <label style="display:flex; align-items:center; gap:5px; cursor:pointer;">
+                    <input type="checkbox" value="teacher" class="notice-target" checked style="width:auto; margin:0;">
+                    Teachers
+                  </label>
+                </div>
+              </div>
+              <button onclick="postNotice()" class="btn" style="background: var(--accent-color);">Post Notice</button>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
+  </div>
 
-    <!-- Student Details Modal -->
-    <div id="studentModal"
-      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
-      <div
-        style="background:white; width:90%; max-width:600px; margin: 50px auto; padding:20px; border-radius:8px; position:relative;">
-        <button onclick="document.getElementById('studentModal').style.display='none'"
-          style="position:absolute; right:15px; top:10px; border:none; background:none; font-size:1.5em; cursor:pointer;">&times;</button>
-        <h2 id="modalStudentName">Student Details</h2>
-        <div id="modalContent"></div>
+  <!-- Student Details Modal -->
+  <div id="studentModal"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
+    <div
+      style="background:white; width:90%; max-width:600px; margin: 50px auto; padding:20px; border-radius:8px; position:relative;">
+      <button onclick="document.getElementById('studentModal').style.display='none'"
+        style="position:absolute; right:15px; top:10px; border:none; background:none; font-size:1.5em; cursor:pointer;">&times;</button>
+      <h2 id="modalStudentName">Student Details</h2>
+      <div id="modalContent"></div>
 
-        <div style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">
-          <h3>Fee Management</h3>
-          <p>Current Status: <strong id="modalFeeStatus">--</strong></p>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <select id="newFeeStatus" style="padding:5px;">
-              <option value="Paid">Paid</option>
-              <option value="Pending">Pending</option>
-              <option value="Overdue">Overdue</option>
-            </select>
-            <button id="updateFeeBtn" class="btn" onclick="updateFeeStatus()">Update Status</button>
-          </div>
+      <div style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">
+        <h3>Fee Management</h3>
+        <p>Current Status: <strong id="modalFeeStatus">--</strong></p>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <select id="newFeeStatus" style="padding:5px;">
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Overdue">Overdue</option>
+          </select>
+          <button id="updateFeeBtn" class="btn" onclick="updateFeeStatus()">Update Status</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="js/user.js?v=3"></script>
-    <script src="js/attendance.js?v=3"></script>
-    <script src="js/marks.js?v=3"></script>
-    <script src="js/notice.js?v=3"></script>
-    <script src="js/admin.js?v=3"></script>
-    <script>
-      // Mobile Sidebar Logic
-      function toggleSidebar() {
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        const isActive = sidebar.classList.contains('active');
+  <script src="js/config.js"></script>
+  <script src="js/user.js?v=3"></script>
+  <script src="js/attendance.js?v=3"></script>
+  <script src="js/marks.js?v=3"></script>
+  <script src="js/notice.js?v=3"></script>
+  <script src="js/admin.js?v=3"></script>
+  <script>
+    // Mobile Sidebar Logic
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const isActive = sidebar.classList.contains('active');
 
-        if (isActive) {
-          sidebar.classList.remove('active');
-          overlay.style.display = 'none';
-        } else {
-          sidebar.classList.add('active');
-          overlay.style.display = 'block';
-        }
+      if (isActive) {
+        sidebar.classList.remove('active');
+        overlay.style.display = 'none';
+      } else {
+        sidebar.classList.add('active');
+        overlay.style.display = 'block';
       }
+    }
 
-      // Navigation Logic
-      function switchView(viewName) {
-        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-        document.getElementById(`view-${viewName}`).classList.add('active');
+    // Navigation Logic
+    function switchView(viewName) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+      document.getElementById(`view-${viewName}`).classList.add('active');
 
-        document.querySelectorAll('.sidebar nav div').forEach(el => el.classList.remove('active-nav'));
-        document.getElementById(`nav-${viewName}`).classList.add('active-nav');
+      document.querySelectorAll('.sidebar nav div').forEach(el => el.classList.remove('active-nav'));
+      document.getElementById(`nav-${viewName}`).classList.add('active-nav');
 
-        // Update Header
-        const titles = {
-          'dashboard': 'Dashboard',
-          'courses': 'My Courses',
-          'schedule': 'Schedule',
-          'profile': 'My Profile',
-          'branches': 'Manage Branches',
-          'fees': 'My Fee Status',
-          'admin': 'Admin Panel'
-        };
-        document.querySelector('#headerInfo h1').innerText = titles[viewName];
+      // Update Header
+      const titles = {
+        'dashboard': 'Dashboard',
+        'courses': 'My Courses',
+        'schedule': 'Schedule',
+        'profile': 'My Profile',
+        'branches': 'Manage Branches',
+        'fees': 'My Fee Status',
+        'admin': 'Admin Panel'
+      };
+      document.querySelector('#headerInfo h1').innerText = titles[viewName];
 
-        if (viewName === 'branches') {
-          // Refresh branches when entering the view
-          if (typeof loadAdminBranches === 'function') loadAdminBranches();
-        }
+      if (viewName === 'branches') {
+        // Refresh branches when entering the view
+        if (typeof loadAdminBranches === 'function') loadAdminBranches();
       }
+    }
 
-      function logout() {
-        localStorage.removeItem('token');
-        document.body.style.opacity = '0';
-        setTimeout(() => { window.location.href = 'login.html'; }, 300);
-      }
-    </script>
+    function logout() {
+      localStorage.removeItem('token');
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = 'login.html'; }, 300);
+    }
+  </script>
 </body>
 
 </html>
