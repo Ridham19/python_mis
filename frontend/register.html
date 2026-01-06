@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Register</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <div class="hero-bg">
     <div class="hero-overlay"></div>
     <div class="auth-card fade-in">
       <h2 style="color: #2d3436;">Create Account</h2>
       <p style="color: #b2bec3; font-size: 0.9em; margin-bottom: 20px;">Join the portal</p>
-      
+
       <form id="registerForm" style="text-align: left;">
         <input type="text" id="name" placeholder="Full Name" required>
         <input type="email" id="email" placeholder="Email Address" required>
         <input type="password" id="password" placeholder="Password" required>
-        
-        <label style="font-size: 0.8em; color: #666; margin-top: 10px; display: block;">Date of Birth (Past Only)</label>
+
+        <label style="font-size: 0.8em; color: #666; margin-top: 10px; display: block;">Date of Birth (Past
+          Only)</label>
         <input type="date" id="dob" required>
 
-        <input type="tel" id="phone" placeholder="Phone Number (10 digits)" pattern="\d{10}" maxlength="10" title="Must be exactly 10 digits" required>
-        
+        <input type="tel" id="phone" placeholder="Phone Number (10 digits)" pattern="\d{10}" maxlength="10"
+          title="Must be exactly 10 digits" required>
+
         <input type="text" id="address" placeholder="Residential Address" required>
 
         <label style="display:block; text-align:left; color:#666; font-size:0.9em; margin-top:10px;">I am a:</label>
@@ -30,17 +34,18 @@
         </select>
 
         <div id="branchDiv">
-            <label style="font-size: 0.8em; color: #666; margin-top: 10px; display: block;">Select Branch</label>
-            <select id="branchCode">
-                <option value="" disabled selected>Loading branches...</option>
-            </select>
+          <label style="font-size: 0.8em; color: #666; margin-top: 10px; display: block;">Select Branch</label>
+          <select id="branchCode">
+            <option value="" disabled selected>Loading branches...</option>
+          </select>
         </div>
 
         <button type="submit" class="btn" style="width:100%; margin-top: 10px;">Register</button>
       </form>
 
       <div style="margin-top: 25px; text-align: center;">
-        <a href="login.html" style="color: #6c5ce7; font-size: 0.9em; font-weight: 600;">Already have an account? Login</a>
+        <a href="login.html" style="color: #6c5ce7; font-size: 0.9em; font-weight: 600;">Already have an account?
+          Login</a>
       </div>
     </div>
   </div>
@@ -52,50 +57,60 @@
 
     // 2. Load Branches on Startup
     async function loadBranches() {
+      try {
+        console.log("Fetching branches...");
         const res = await fetch('/api/branches');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         const branches = await res.json();
+        console.log("Branches loaded:", branches);
+
         const select = document.getElementById('branchCode');
         select.innerHTML = '<option value="" disabled selected>Select a Branch</option>';
         branches.forEach(b => {
-            select.innerHTML += `<option value="${b.code}">${b.name} (${b.code})</option>`;
+          select.innerHTML += `<option value="${b.code}">${b.name} (${b.code})</option>`;
         });
+      } catch (e) {
+        console.error(e);
+        alert("Failed to load branches: " + e.message);
+      }
     }
     loadBranches();
 
     // 3. Toggle Branch visibility
     function toggleBranchSelection() {
-        const role = document.getElementById('role').value;
-        const div = document.getElementById('branchDiv');
-        div.style.display = (role === 'student') ? 'block' : 'none';
+      const role = document.getElementById('role').value;
+      const div = document.getElementById('branchDiv');
+      div.style.display = (role === 'student') ? 'block' : 'none';
     }
 
     // 4. Submit Logic
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const role = document.getElementById('role').value;
       const branch_code = (role === 'student') ? document.getElementById('branchCode').value : '';
 
       // Frontend Mobile Validation backup
       const phone = document.getElementById('phone').value;
       if (phone.length !== 10 || isNaN(phone)) {
-          alert("Phone number must be exactly 10 digits.");
-          return;
+        alert("Phone number must be exactly 10 digits.");
+        return;
       }
       if (role === 'student' && !branch_code) {
-          alert("Please select a branch.");
-          return;
+        alert("Please select a branch.");
+        return;
       }
 
       const payload = {
-          name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          password: document.getElementById('password').value,
-          role: role,
-          dob: document.getElementById('dob').value,
-          phone: phone,
-          address: document.getElementById('address').value,
-          branch_code: branch_code
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        role: role,
+        dob: document.getElementById('dob').value,
+        phone: phone,
+        address: document.getElementById('address').value,
+        branch_code: branch_code
       };
 
       const res = await fetch('/api/register', {
@@ -114,4 +129,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -23,4 +23,6 @@ def get(role):
     notices = get_notices_for_role(request.db, role)
     for notice in notices:
         notice['_id'] = str(notice['_id'])
+        if 'date' in notice:
+            notice['date'] = notice['date'].isoformat()
     return jsonify(notices)

@@ -21,7 +21,7 @@ COMPUTER SCIENCE (CS)
     - CS104: Soft Skills
   Semester 2:
     - CS105: Object Oriented Programming [LAB]
-    - CS106: Disco Maths
+    - CS106: Maths-2
     - CS107: English Communication
     - CS108: Basic Electronics [LAB]
   Semester 3:

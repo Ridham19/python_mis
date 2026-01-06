@@ -230,34 +230,48 @@ async function updateFeeStatus() {
 }
 
 async function postNotice() {
-    const title = document.getElementById('noticeTitle').value;
-    const content = document.getElementById('noticeContent').value;
-    const targets = Array.from(document.querySelectorAll('.notice-target:checked')).map(el => el.value);
+    console.log("postNotice called");
+    try {
+        const titleVal = document.getElementById('noticeTitle');
+        const contentVal = document.getElementById('noticeContent');
 
-    if (!title || !content || targets.length === 0) {
-        return alert("Please fill all fields and select at least one target group.");
-    }
+        if (!titleVal || !contentVal) {
+            console.error("Elements not found");
+            return alert("Error: Input elements missing in DOM");
+        }
 
-    const token = localStorage.getItem('token');
-    const res = await fetch('/api/notices', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            title,
-            content,
-            visible_to: targets
-        })
-    });
+        const title = titleVal.value;
+        const content = contentVal.value;
+        const targets = Array.from(document.querySelectorAll('.notice-target:checked')).map(el => el.value);
 
-    if (res.ok) {
-        alert("Notice Posted Successfully!");
-        document.getElementById('noticeTitle').value = '';
-        document.getElementById('noticeContent').value = '';
-        // Optionally switch view or reload notices if visible
-    } else {
-        alert("Failed to post notice.");
+        if (!title || !content || targets.length === 0) {
+            return alert("Please fill all fields and select at least one target group.");
+        }
+
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/notices', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                title,
+                content,
+                visible_to: targets
+            })
+        });
+
+        if (res.ok) {
+            alert("Notice Posted Successfully!");
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeContent').value = '';
+            // Optionally switch view or reload notices if visible
+        } else {
+            alert("Failed to post notice.");
+        }
+    } catch (e) {
+        console.error("Post Notice Error:", e);
+        alert("An unexpected error occurred: " + e.message);
     }
 }

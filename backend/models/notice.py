@@ -11,4 +11,4 @@ def create_notice(db, title, content, visible_to, posted_by="Admin"):
     return db.notices.insert_one(notice)
 
 def get_notices_for_role(db, role):
-    return list(db.notices.find({"visible_to": role}))
+    return list(db.notices.find({"visible_to": role}).sort("date", -1))

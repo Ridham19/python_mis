@@ -41,7 +41,7 @@ def get_students_by_year():
             # Sem 3/4 -> Year 2 (2024)
             # Formula: 2026 - ceil(sem/2)
             calc_year = 2026 - math.ceil(sem_val / 2)
-            query["admission_year"] = calc_year
+            query["admission_year"] = str(calc_year)
         except ValueError:
             pass # Invalid semester format
             
