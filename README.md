@@ -1,112 +1,137 @@
-# UNIMIS - Student Management System
+# 🎓 UNIMIS - Student Management System
 
-A robust, role-based School Management System built with **Python Flask** and **MongoDB**. This application streamlines academic processes including attendance tracking, marks management, fee status, and scheduling for students, teachers, and administrators.
+![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+![Flask](https://img.shields.io/badge/Framework-Flask-black?style=for-the-badge&logo=flask)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-green?style=for-the-badge&logo=mongodb)
 
-## 🌐 Live Demo
+A robust, role-based School Management System that streamlines academic processes. From tracking attendance to generating official PDF reports, UNIMIS handles it all.
 
-**Deployment Link:** [https://unimis.onrender.com/](https://unimis.onrender.com/)
+---
+
+## 🌐 Live Demo & Access
+
+**🚀 Deployment Link:** [https://unimis.onrender.com/](https://unimis.onrender.com/)
 
 ### 🔑 Demo Credentials (Student)
-* **ID:** `2023CS001`
-* **Password:** `studentpassword`
+| Role | User ID | Password |
+| :--- | :--- | :--- |
+| **Student** | `2023CS001` | `studentpassword` |
+
+---
+
+## ✨ Key Highlights
+
+### 📄 One-Click Official PDF Downloads
+UNIMIS automates the generation of official documents, saving administrative time and giving students instant access to their records.
+* **🏆 Result Generation:** Students can view their semester marks and instantly download a formatted **Official Result PDF**.
+* **💰 Fee Receipts:** Real-time fee status checks with an option to download **Fee Payment Receipts/Statements** as PDFs.
+
+---
+
+## 📸 Application Gallery
+
+### 👨‍💼 Admin Control Center
+Comprehensive tools for managing faculty, students, and notices.
+<p align="center">
+  <img src="screenshots/admin/admin_dashboard.png" width="45%" alt="Admin Dashboard">
+  <img src="screenshots/admin/admins_faculty_view.png" width="45%" alt="Faculty Management">
+</p>
+<p align="center"><em>Left: Main Admin Dashboard | Right: Faculty Management View</em></p>
+
+<p align="center">
+  <img src="screenshots/admin/notice_upload.png" width="45%" alt="Notice Board Config">
+  <img src="screenshots/admin/branch_management.png" width="45%" alt="Branch Management">
+</p>
+<p align="center"><em>Notice Board Configuration & Branch Management</em></p>
+
+### 👩‍🏫 Teacher Portal
+Dedicated interface for class management and attendance tracking.
+<p align="center">
+  <img src="screenshots/teacher/Screenshot 2026-01-09 142213.png" width="30%" alt="Teacher Dashboard">
+  <img src="screenshots/teacher/Screenshot 2026-01-09 142252.png" width="30%" alt="Attendance Marking">
+  <img src="screenshots/teacher/Screenshot 2026-01-09 142314.png" width="30%" alt="Student List">
+</p>
+<p align="center"><em>Teacher Dashboard, Attendance Marking, and Student Lists</em></p>
+
+### 👨‍🎓 Student Dashboard & Reports
+<p align="center">
+  <img src="screenshots/student/student_dashboard.png" width="45%" alt="Student Dashboard">
+  <img src="screenshots/student/time_table.png" width="45%" alt="Timetable">
+</p>
+
+### 📑 PDF Generation (Results & Fees)
+<p align="center">
+  <img src="screenshots/student/result_pdf.png" width="45%" alt="Result PDF">
+  <img src="screenshots/student/fees_pdf.png" width="45%" alt="Fees PDF">
+</p>
+<p align="center"><em>Auto-generated Official PDF Reports</em></p>
 
 ---
 
 ## 🚀 Features by Role
 
 ### 👨‍🎓 Student
-* **Secure Login:** Access via Admission Number (e.g., `2023CS001`) or Email.
-* **Dashboard Overview:** Quick stats on attendance and performance.
-* **Attendance Tracking:** detailed statistics per subject (Total Classes, Present, Absent, Percentage).
-* **Academic Results:** View semester marks and download **Official Result PDFs**.
-* **Fee Status:** Real-time status for Tuition, Hostel, and Library fees.
-* **Class Schedule:** Weekly time table visualization.
-* **Course Management:** List of enrolled subjects for the current semester.
+* **Secure Login:** Access via Admission Number or Email.
+* **📊 Insightful Dashboard:** View attendance stats (Present/Absent %) at a glance.
+* **📥 Downloads:** **(Highlight)** Instant PDF downloads for Marksheets and Fee Receipts.
+* **📅 Schedule:** Visual weekly class time table.
+* **💸 Financials:** Track Tuition, Hostel, and Library fee status.
 
 ### 👩‍🏫 Teacher
 * **Class Management:** View assigned subjects and classes.
-* **Mark Attendance:** Digital interface to record student attendance.
-* **Student Verification:** Approve new student registrations.
+* **📝 Attendance:** Digital interface to mark and update student attendance.
+* **✅ Approvals:** Verify and approve new student registrations.
 
 ### 👨‍💼 Admin
-* **Faculty Management:** View, filter, and manage faculty members by branch.
-* **Student Management:** Search and manage students by Year and Branch.
-* **Academic Configuration:**
-    * **Manage Subjects:** Add and map subjects to specific branches and years.
-    * **Manage Branches:** Configure department/branch details.
-* **Approvals:** Review and approve teacher registrations.
-* **Notices:** Broadcast announcements to students and staff.
+* **👥 User Management:** Manage Faculty and Students by Branch/Year.
+* **🏫 Academic Config:** Map subjects to branches, manage departments.
+* **📢 Notices:** Broadcast announcements to the entire institution.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Python 3, Flask (Blueprints architecture)
+* **Backend:** Python 3, Flask (Blueprints)
 * **Database:** MongoDB (PyMongo)
-* **Authentication:** JWT (JSON Web Tokens)
-* **PDF Generation:** ReportLab
+* **Reports:** ReportLab (PDF Generation)
 * **Frontend:** HTML5, CSS3, JavaScript
 * **Deployment:** Render / Gunicorn
 
 ---
 
-## ⚙️ Local Installation & Setup
+## ⚙️ Installation & Setup
 
-### 1. Prerequisites
-* Python 3.11+
-* MongoDB (installed locally or a cloud URI)
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/ridham19/unimis.git](https://github.com/ridham19/unimis.git)
+    cd unimis
+    ```
 
-### 2. Clone the Repository
-```bash
-git clone [https://github.com/ridham19/unimis.git](https://github.com/ridham19/unimis.git)
-cd unimis
-```
-3. Install Dependencies
-```Bash
+2.  **Install Dependencies**
+    ```bash
+    pip install -r backend/requirements.txt
+    ```
 
-pip install -r backend/requirements.txt
-```
-4. Configuration
-Set up your environment variables. You can create a .env file or export them directly:
+3.  **Environment Setup**
+    Set your `MONGO_URI` (local or Atlas) in your environment variables.
+    ```bash
+    export MONGO_URI="mongodb://localhost:27017/"
+    ```
 
-```Bash
+4.  **Seed Database**
+    Initialize the system with the admin user and default data.
+    ```bash
+    python backend/seed_admin.py
+    python backend/seed_branches.py
+    ```
 
-export MONGO_URI="mongodb://localhost:27017/"
-```
-5. Seed the Database
-Initialize your database with admin users, branches, and subjects using the provided scripts:
+5.  **Run Application**
+    ```bash
+    python backend/app.py
+    ```
+    Visit `http://localhost:5000`
 
-```Bash
+---
 
-# Create Admin User
-python backend/seed_admin.py
-
-# Populate Initial Data (Optional)
-python backend/seed_branches.py
-python backend/seed_subjects.py
-```
-6. Run the Application
-```Bash
-
-python backend/app.py
-```
-Visit http://localhost:5000 in your browser.
-
-📂 Project Structure
-```Plaintext
-
-unimis/
-├── backend/
-│   ├── app.py              # Application entry point
-│   ├── config.py           # Configuration settings
-│   ├── models/             # Database models (User, Marks, Attendance, etc.)
-│   ├── routes/             # API Blueprints (Auth, Admin, Student, etc.)
-│   ├── utils/              # Utilities (PDF Generator)
-│   └── seed_*.py           # Database seeding scripts
-├── frontend/
-│   ├── index.html          # Landing page
-│   ├── dashboard.html      # Main dashboard interface
-│   ├── css/                # Stylesheets
-│   └── js/                 # Frontend logic (API calls, UI updates)
-└── README.md
-```
+**Author:** [Ridham19](https://github.com/Ridham19)
