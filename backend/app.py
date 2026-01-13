@@ -11,7 +11,9 @@ import os
 def create_app():
     app = Flask(__name__, static_folder='../frontend', static_url_path='')
     
-    client = MongoClient("mongodb://localhost:27017/")
+    mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+    
+    client = MongoClient(mongo_uri)
     db = client["student_management_v2"]
     
     # Initialize Indexes
