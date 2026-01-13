@@ -5,3 +5,4 @@ reportlab==4.0.9
 requests==2.31.0
 gunicorn
 dnspython
+python-dotenv
